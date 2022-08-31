@@ -2,11 +2,20 @@ import {createRouter, createWebHashHistory} from 'vue-router'
 
 import Home from '@/views/Home.vue'
 import Board from '@/views/Board.vue'
+import Task from '@/views/Task.vue'
 
 
 
 const routes = [
-  { path: '/', component: Board },
+  { path: '/', name: 'board', component: Board,
+    children: [
+      {
+        path: 'task/:id',
+        name: 'task',
+        component: Task
+      }
+    ]
+  },
   // { path: '/about', component: About },
 ]
 
