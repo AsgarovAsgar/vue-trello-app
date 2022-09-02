@@ -1,6 +1,6 @@
 import { createStore } from 'vuex'
 import defaultBoard from './defaultBoard'
-import { saveStatePlugin } from '../utils'
+import { saveStatePlugin, uuid } from '../utils'
 
 const board = JSON.parse(localStorage.getItem('board')) || defaultBoard
 
@@ -11,10 +11,18 @@ export const store = createStore({
       board
     }
   },
+  mutations: {
+    CREATE_TASK(state, {tasks, name}) {
+      tasks.push({
+        id: uuid(),
+        name,
+        description: 'test'
+      })
+    }
+  },
   getters: {
     getTask: (state) => (id) => {
-      let task
-      console.log('id', id);
+      // console.log('id', id);
       for (let column of state.board.columns) {
         // return id
         // return column.tasks.find(task => task.id === id)
@@ -27,7 +35,6 @@ export const store = createStore({
           }
         }
       }
-      return task
     }
   }
 })

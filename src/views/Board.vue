@@ -7,7 +7,12 @@
           {{column.name}}
         </h2>
         <div class="flex flex-col space-y-2">
-          <div class="rounded-md p-2 bg-white/50 shadow-md" v-for="task in column.tasks" :key="task.id">
+          <div
+            class="rounded-md p-2 bg-white/50 shadow-md"
+            v-for="task in column.tasks"
+            :key="task.id"
+            @click="goToTask(task)"
+          >
             <p class="font-semibold">
               {{task.name}}
             </p>
@@ -15,10 +20,16 @@
               {{task.description}}
             </p> 
           </div>
+          <input 
+            type="text"
+            placeholder="Add new task"
+            class="p-2 bg-transparent border border-white"
+            @keyup.enter="createTask($event, column.tasks)"
+          >
         </div>
       </div>
     </div>
-    <div v-if="isTaskOpen" class="task-bg">
+    <div v-if="isTaskOpen" @click.self="close" class="absolute top-0 left-0 w-full h-screen flex justify-center items-center bg-gray-900/40">
       <router-view></router-view>
     </div>
   </div>
@@ -36,6 +47,21 @@ export default {
     // board() {
     //   return mapState
     // }
+  },
+  methods: {
+    goToTask(task) {
+      this.$router.push({name: 'task', params: { id: task.id }})
+    },
+    close() {
+      this.$router.push({ name: 'board' })
+    },
+    createTask(e, tasks) {
+      this.$store.commit('CREATE_TASK', {
+        tasks,
+        name: e.target.value
+      })
+      e.target.value = ''
+    }
   }
 }
 </script>
