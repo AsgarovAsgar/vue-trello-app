@@ -9,19 +9,19 @@ export default {
         {
           description: 'yes',
           name: 'first task',
-          id: uuid(),
+          id: 'woierhiwehti',
           userAssigned: null
         },
         {
           description: '',
           name: 'second task',
-          id: uuid(),
+          id: 'woierhiwehtiwt',
           userAssigned: null
         },
         {
           description: '',
           name: 'third task',
-          id: uuid(),
+          id: 'wofrewierhiwehti',
           userAssigned: null
         }
       ]
@@ -32,19 +32,19 @@ export default {
         {
           description: '',
           name: 'first task',
-          id: uuid(),
+          id: 'woifweerhiwehti',
           userAssigned: null
         },
         {
           description: '',
           name: 'second task',
-          id: uuid(),
+          id: 'woifewfrweerhiwehti',
           userAssigned: null
         },
         {
           description: '',
           name: 'third task',
-          id: uuid(),
+          id: 'woierhiwehtiwet',
           userAssigned: null
         }
       ]
@@ -55,19 +55,19 @@ export default {
         {
           description: '',
           name: 'first task',
-          id: uuid(),
+          id: 'wofsierhiwehti',
           userAssigned: null
         },
         {
           description: '',
           name: 'second task',
-          id: uuid(),
+          id: 'woierhiwehtiwfwet',
           userAssigned: null
         },
         {
           description: '',
           name: 'third task',
-          id: uuid(),
+          id: 'fswefwefrwerw',
           userAssigned: null
         }
       ]
