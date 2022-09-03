@@ -5,7 +5,7 @@ export function uuid () {
 export function saveStatePlugin(store) {
   // console.log('bax')
   store.subscribe((mutation, state) => {
-      console.log('state', state, mutation.type);
+      // console.log('state', state, mutation.type);
       // localStorage.setItem('board', JSON.stringify(state.board))
     }
   )
