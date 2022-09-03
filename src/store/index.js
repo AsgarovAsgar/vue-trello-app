@@ -18,6 +18,26 @@ export const store = createStore({
         name,
         description: 'test'
       })
+    },
+    UPDATE_TASK(state, { task, key, value}) {
+       task[key] = value
+    },
+    MOVE_TASK(state, { fromColumnName, toColumnName, toColumnTasks, taskId }) {
+      const fromColumn = state.board.columns.find(column => column.name === fromColumnName)
+      const takenTask = fromColumn.tasks.find(task => task.id === taskId)
+      // console.log('takenTask', takenTask);
+
+      if (fromColumnName !== toColumnName) {
+        fromColumn.tasks.splice(fromColumn.tasks.findIndex(task => task.id === taskId), 1)
+        toColumnTasks.push(takenTask)
+      } else {
+        console.log('The column is the same');
+      }
+    },
+    MOVE_COLUMN(state, { fromColumnIndex, toColumnIndex}) {
+      columnList = state.board.columns
+      takenColumn = columnList.splice(fromColumnIndex, 1)[0]
+      columnList.splice(toColumnIndex, 0, takenColumn)
     }
   },
   getters: {

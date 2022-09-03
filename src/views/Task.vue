@@ -6,12 +6,14 @@
         class="p-2 text-lg font-bold w-full"
         :value="task.name"
         @change="updateTaskProperty($event, 'name')"
+        @keyup.enter="updateTaskProperty($event, 'name')"
       >
       <textarea
         class="p-2 border rounded-md w-full"
         rows="5"
         :value="task.description"
         @change="updateTaskProperty($event, 'description')"  
+        @keyup.enter="updateTaskProperty($event, 'description')"  
         ></textarea>
     </div>
   </div>
@@ -31,7 +33,11 @@ export default {
   },
   methods: {
     updateTaskProperty(e, key) {
-      console.log('key', key);
+      this.$store.commit('UPDATE_TASK', {
+        task: this.task,
+        key,
+        value: e.target.value
+      })
     }
   }
 }
