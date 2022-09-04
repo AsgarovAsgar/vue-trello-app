@@ -1,12 +1,13 @@
 <template>
   <div class="bg-green-500 min-h-screen">
     <!-- {{board}} -->
+    <h1 class="px-4 pt-4 text-xl font-bold">My Nation App</h1>
     <div class="flex flex-row gap-8 p-4">
       <div 
         class="p-4 border flex flex-col gap-2 rounded-md max-w-lg flex-1 bg-white/80 shadow-lg"
         v-for="(column, index) in board.columns"
         :key="column.name"
-        @drop="moveTask($event, column.name, column.tasks)"
+        @drop="moveTaskOrColumn($event, column.name, column.tasks)"
         @dragover.prevent
         @dragenter.prevent
 
@@ -82,28 +83,42 @@ export default {
 
       e.dataTransfer.setData('task-id', taskId)
       e.dataTransfer.setData('column-name', columnName)
+      e.dataTransfer.setData('type', 'task')
     },
     pickupColumn(e, fromColumnIndex) {
       e.dataTransfer.dropEffect = 'move'
       e.dataTransfer.effectAllowed = 'move'
 
       e.dataTransfer.setData('from-column-index', fromColumnIndex)
+      e.dataTransfer.setData('type', 'column')
 
       // first of all I should define what I want to drag. Is it task or column
     },
-    moveTask(e, toColumnName, toColumnTasks) {
-      // console.log('moveTask', e, columnName, columnTasks);
-      const fromColumnName = e.dataTransfer.getData('column-name')
-      const taskId = e.dataTransfer.getData('task-id')
+    moveTaskOrColumn(e, toColumnName, toColumnTasks, toColumnIndex) {
+      console.log('moveTask', e, toColumnName, toColumnTasks);
+      const type  = e.dataTransfer.getData('type')
+      console.log('type', type);
+
+      if(type === 'task') {
+        const fromColumnName = e.dataTransfer.getData('column-name')
+        const taskId = e.dataTransfer.getData('task-id')
+
+        this.$store.commit('MOVE_TASK', {
+          fromColumnName,
+          toColumnName,
+          toColumnTasks,
+          taskId
+        })
+      } else if (type === 'column') {
+        const fromColumnIndex = e.dataTransfer.getData('from-column-index')
+
+        this.$store.commit('MOVE_COLUMN', {
+          fromColumnIndex,
+          toColumnIndex
+        })
+      }
       // console.log('fromColumnName', fromColumnName);
       // console.log('fromTaskId', fromTaskId);
-
-      this.$store.commit('MOVE_TASK', {
-        fromColumnName,
-        toColumnName,
-        toColumnTasks,
-        taskId
-      })
     }
   }
 }

@@ -35,8 +35,8 @@ export const store = createStore({
       }
     },
     MOVE_COLUMN(state, { fromColumnIndex, toColumnIndex}) {
-      columnList = state.board.columns
-      takenColumn = columnList.splice(fromColumnIndex, 1)[0]
+      const columnList = state.board.columns
+      const takenColumn = columnList.splice(fromColumnIndex, 1)[0]
       columnList.splice(toColumnIndex, 0, takenColumn)
     }
   },
