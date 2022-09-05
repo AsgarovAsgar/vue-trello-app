@@ -19,6 +19,12 @@ export const store = createStore({
         description: 'test'
       })
     },
+    CREATE_COLUMN(state, { name }) {
+      state.board.columns.push({
+        name,
+        tasks: []
+      })
+    },
     UPDATE_TASK(state, { task, key, value}) {
        task[key] = value
     },
@@ -38,6 +44,10 @@ export const store = createStore({
       const columnList = state.board.columns
       const takenColumn = columnList.splice(fromColumnIndex, 1)[0]
       columnList.splice(toColumnIndex, 0, takenColumn)
+    },
+    MOVE_TASK_WITHIN_COLUMN(state, {tasks, fromTaskIndex, toTaskIndex}) {
+      const takenTask = tasks.splice(fromTaskIndex, 1)[0]
+      tasks.splice(toTaskIndex, 0, takenTask)
     }
   },
   getters: {
