@@ -37,7 +37,7 @@ export const store = createStore({
         fromColumn.tasks.splice(fromColumn.tasks.findIndex(task => task.id === taskId), 1)
         toColumnTasks.push(takenTask)
       } else {
-        console.log('The column is the same');
+        // console.log('The column is the same');
       }
     },
     MOVE_COLUMN(state, { fromColumnIndex, toColumnIndex}) {
