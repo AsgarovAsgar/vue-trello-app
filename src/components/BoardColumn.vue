@@ -20,8 +20,8 @@
       />
       <input
         type="text"
-        placeholder="+ Add new task"
-        class="p-2 bg-transparent border rounded-md border-white"
+        placeholder="+ Add a task"
+        class="p-2 bg-transparent hover:bg-gray-900/10 rounded-md placeholder-gray-700 cursor-pointer transition duration-300"
         @keyup.enter="createTask($event, column.tasks)"
       />
     </div>
